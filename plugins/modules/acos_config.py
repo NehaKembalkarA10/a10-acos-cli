@@ -353,11 +353,9 @@ def main():
             configuration_file = open(module.params["file_path"], 'r')
             command_lines = configuration_file.readlines()
             configuration_file.close()
-            run_commands(module, 'configure')
             for line in command_lines:
                 if not line.startswith('!'):
-                    run_commands(module, line.strip())
-            run_commands(module, 'end')
+                    edit_config_or_macro(connection, line)
         except IOError:
             module.fail_json(msg="File " + module.params["file_path"] + " Not Found!")
 
