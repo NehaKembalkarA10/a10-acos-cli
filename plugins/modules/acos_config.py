@@ -153,18 +153,18 @@ EXAMPLES = r'''
       - slb virtual-server viptest1 2.2.2.3
       - port 80 http
 
-- name: render a Jinja2 template onto an ACOS device
+- name: render a template onto an ACOS device
   a10.acos_cli.acos_config:
     backup: yes
-    src: config.j2
+    src: config.cfg
 
 - name: configure from multiple files
   a10.acos_cli.acos_config:
     src: "{{item}}"
   register: _result
   loop:
-    - file1.j2
-    - file2.j2
+    - file1.cfg
+    - file2.cfg
 
 - name: save running to startup when modified
   a10.acos_cli.acos_config:
@@ -240,8 +240,8 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.c
 
 def get_candidate_config(module):
     candidate = ''
-    if module.params["src"]:
-        candidate = module.params["src"]
+    if module.params['src']:
+        candidate = module.params['src']
     elif module.params['lines']:
         candidate_obj = NetworkConfig(indent=1)
         candidate_obj.add(module.params['lines'])
@@ -291,7 +291,7 @@ def main():
         dir_path=dict(type='path')
     )
     argument_spec = dict(
-        src=dict(type="path"),
+        src=dict(type='path'),
         lines=dict(aliases=['commands'], type='list'),
         intended_config=dict(aliases=['commands'], type='list'),
         before=dict(type='list'),
@@ -338,7 +338,7 @@ def main():
         if module.params['backup']:
             result['__backup__'] = contents
 
-    if any((module.params['lines'], module.params["src"])):
+    if any((module.params['lines'], module.params['src'])):
         candidate = get_candidate_config(module)
 
         config_diff = candidate
