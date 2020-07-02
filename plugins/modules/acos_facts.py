@@ -143,7 +143,8 @@ class FactsArgs(object):
 
     argument_spec = {
         'gather_subset': dict(default=['all'], type='list'),
-        'partition': dict(default='shared')
+        'partition': dict(default='shared'),
+        'gather_network_resources': dict(type='list')
     }
 
 
