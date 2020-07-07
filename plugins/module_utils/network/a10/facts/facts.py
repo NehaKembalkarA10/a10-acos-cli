@@ -14,6 +14,12 @@ from ansible_collections.a10.acos_cli.plugins.module_utils.network.a10.facts.lac
 from ansible_collections.a10.acos_cli.plugins.module_utils.network.a10.facts.lacp.lacp import (
     LacpFacts,
 )
+from ansible_collections.a10.acos_cli.plugins.module_utils.network.a10.facts.interfaces.interfaces import (
+    InterfacesFacts,
+)
+from ansible_collections.a10.acos_cli.plugins.module_utils.network.a10.facts.lldp_global.lldp_global import (
+    Lldp_globalFacts,
+)
 from ansible_collections.a10.acos_cli.plugins.module_utils.network.a10.facts.base import (
     Default, Hardware, Interfaces, Config)
 
@@ -26,7 +32,9 @@ FACT_LEGACY_SUBSETS = dict(
 
 FACT_RESOURCE_SUBSETS = dict(
     lacp_interfaces=Lacp_InterfacesFacts,
-    lacp=LacpFacts
+    lacp=LacpFacts,
+    interfaces=InterfacesFacts,
+    lldp_global=Lldp_globalFacts
 )
 
 
